@@ -1,0 +1,87 @@
+CODIGOS QUE MANDA DISCORDIADOR A MI-RAM:sssss
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+INICIAR_PATOTA
+    STRING              tareas                  -> CADA VEZ Q HAY UN ; SPLIT
+    INT                 id_patota
+
+INICIAR_TRIPULANTE
+    INT                 id_tripulante 
+    INT                 id_patota
+    INT                 pos_x
+    INT                 pos_y
+
+EXPULSAR_TRIPULANTE
+    INT                 idTripulanteAEliminar
+
+ENVIAR_OP                   -> miRAM devuelve una tarea
+    INT ID PATOTA
+    INT ID TRIPULANTE    
+
+ACTUALIZAR_UBICACION
+    INT                 id_tripulante
+    INT                 id_patota
+    INT                 pos_x     ----> decir posicion final, no decir desplazamiento
+    INT                 pos_y
+///////////////PARA ESTE CODIGO DE OPERACION MONGO ADEMAS RECIBE///////////////////////////////////
+    INT                 pos_x_inicial      
+    INT                 pos_y_inicial
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+CODIGOS DE MI-RAM A DISCORDIADIOR
+
+GENERAR_OXIGENO 
+    INT                 pos_x_tarea  ------> DONDE TA LA TAREA
+    INT                 pos_Y_tarea  ------> DONDE TA LA TAREA
+    INT                 parametro_tarea ------------>  la cantidad de cosas a editar segun la tarea a hacer 
+    INT                tiempo_tarea -----------------> tiempo que lleva la tarea
+    INT                 ultima_tarea ------------------> si es la ultima pasar el valor 1, si no es la ultima pasar 0
+
+CONSUMIR_COMIDA 
+    INT                 pos_x_tarea  ------> DONDE TA LA TAREA
+    INT                 pos_Y_tarea  ------> DONDE TA LA TAREA
+    INT                 parametro_tarea ------------>  la cantidad de cosas a editar segun la tarea a hacer 
+    INT                 tiempo_tarea -----------------> tiempo que lleva la tarea
+    INT                 ultima_tarea ------------------> si es la ultima pasar el valor 1, si no es la ultima pasar 0
+
+GENERAR_COMIDA 
+    INT                 pos_x_tarea  ------> DONDE TA LA TAREA
+    INT                 pos_Y_tarea  ------> DONDE TA LA TAREA
+    INT                 parametro_tarea ------------>  la cantidad de cosas a editar segun la tarea a hacer 
+    INT                 tiempo_tarea -----------------> tiempo que lleva la tarea
+    INT                 ultima_tarea ------------------> si es la ultima pasar el valor 1, si no es la ultima pasar 0
+
+CONSUMIR_COMIDA 
+    INT                 pos_x_tarea  ------> DONDE TA LA TAREA
+    INT                 pos_Y_tarea  ------> DONDE TA LA TAREA
+    INT                 parametro_tarea ------------>  la cantidad de cosas a editar segun la tarea a hacer 
+    INT                 tiempo_tarea -----------------> tiempo que lleva la tarea
+    INT                 ultima_tarea ------------------> si es la ultima pasar el valor 1, si no es la ultima pasar 0
+
+GENERAR_BASURA 
+    INT                 pos_x_tarea  ------> DONDE TA LA TAREA
+    INT                 pos_Y_tarea  ------> DONDE TA LA TAREA
+    INT                 parametro_tarea ------------>  la cantidad de cosas a editar segun la tarea a hacer 
+    INT                 tiempo_tarea -----------------> tiempo que lleva la tarea
+    INT                 ultima_tarea ------------------> si es la ultima pasar el valor 1, si no es la ultima pasar 0
+
+DESCARTAR_BASURA 
+    INT                 pos_x_tarea  ------> DONDE TA LA TAREA
+    INT                 pos_Y_tarea  ------> DONDE TA LA TAREA
+    INT                 parametro_tarea ------------>  la cantidad de cosas a editar segun la tarea a hacer 
+    INT                 tiempo_tarea -----------------> tiempo que lleva la tarea
+    INT                 ultima_tarea ------------------> si es la ultima pasar el valor 1, si no es la ultima pasar 0
+
+
+
+
+
+
+
+
+
+// COSAS QUE FALTAN EN DISCORDIADIOR
+
+CICLOS
+FIFO
+RR
+OBTENER BITACORA

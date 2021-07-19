@@ -1,0 +1,46 @@
+1) cuando hacemos el open de los files en imongo, tenemos un archivo ya creado?
+Si ya esta creado, se crea con el tamanio fijo que nos pasan en el config?
+Si no se crean con tamanio fijo, significa que tenemos que mapear ese tamanio?
+Si mapeamos un tamanio que pasa si queremos escribir mas?
+
+B0
+0    B
+1    B
+
+B1    
+2    C
+3    C
+
+B2
+4    O
+5    O
+
+B3
+6    C
+7    C
+
+B4
+8    C
+9    C
+
+B5
+10   O
+11   O
+
+BLOQUES USADOS (BITMAP)
+[1,1,1,1,1,1]
+
+COMIDA:
+3 BLOQUES
+[1,3,4]
+C
+
+BASURA
+1 BLOQUES
+[0]
+B
+
+OXIGENO
+2 BLOQUES
+[2,5]
+O

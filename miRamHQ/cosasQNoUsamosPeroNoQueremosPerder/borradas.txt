@@ -1,0 +1,197 @@
+t_list* separarTareas(char* tareas, int idPat){
+	t_list* tareasNuevas;
+	tareasNuevas = list_create();
+
+	char** splitPorBarraN = string_split(tareas, "\n");
+	int cantTareas = string_arr_size(splitPorBarraN);		//SUPONEMOS QUE EN LA ULTIMA TAREA NO HAY UN \n
+	
+	for(int i = 0; i<cantTareas; i++){
+		char** splitPorPuntoYcoma = string_split(splitPorBarraN[i], ";");
+		char** splitPorEspacio = string_split(splitPorPuntoYcoma[0], " ");
+
+		tarea* tareaNueva;
+		tarea->cod_tarea 	= splitPorEspacio[0];
+		tarea->parametros 	= splitPorEspacio[1];
+		tarea->pos_x 		= splitPorPuntoYcoma[1];
+		tarea->pos_y 		= splitPorPuntoYcoma[2];
+		tarea->tiempo 		= splitPorPuntoYcoma[3];
+		tarea->id_patota 	= idPat;
+
+		list_add(tareasNuevas, tarea);
+	}
+	free(tareaNueva);
+	free(splitPorBarraN);
+	free(splitPorPuntoYcoma);
+	free(splitPorEspacio);
+	return tareasNuevas;
+
+}
+
+---------------------------------------------------------------------------------------
+//////////////////////////////////////////////////
+/*
+void crear_mapa(NIVEL* nivel){
+	int nivel_gui_inicializar(void);
+	nivel_gui_get_area_nivel(20, 20);
+	nivel = nivel_crear("Mapa Horrible");
+	nivel_gui_dibujar(nivel);
+}
+
+void finalizar_mapa(NIVEL* nivel){
+	int nivel_destruir(NIVEL* nivel);
+	int nivel_gui_terminar(void);
+}*/
+
+////////////////////////////////////////////////
+
+/*
+typedef struct
+{
+	uint32_t  id_tripulante;
+	char estado;            		// Estado del tripulante (N/R/E/B)
+	uint32_t pos_x;             
+	uint32_t pos_y;           
+	uint32_t id_sig_inst;         	// posicion -> 0,1,2,3,4...
+	uint32_t dir_PCB;			 	// Dirección lógica del PCB del tripu
+} tripulante_tcb;
+t_list* tripulantes;
+typedef struct
+{
+	uint32_t  id_patota;
+	uint32_t dir_tareas;			// Dirección lógica del INICIO de las Tareas
+} patota_pcb;
+t_list* patotas; 
+
+typedef struct// AGREGADO X MI
+{
+    int x;
+    int y;
+    char* id;
+
+} t_tripulante;
+*/
+
+
+/*
+typedef struct
+{
+	int id_patota;
+	char* cod_tarea;
+	char* parametros;
+	char* pos_x;
+	char* pos_y;
+	char* tiempo;
+} tarea;*/
+//t_list* tareas;
+
+/*
+int encontrarTripulante(int id){ 
+	int tamanioLista = list_size(tripulantes); 
+	tripulante_tcb* aux = tripulantes->head;
+
+	for(int i = 0; i < tamanioLista; i++){
+		aux = list_get(tripulantes,i);
+		if(aux->id_tripulante == id){
+			free(aux);
+			return i;
+		}
+	}
+	free(aux);
+	return -1;
+}
+
+int encontrarPatota(int id){ 
+	int tamanioLista = list_size(patotas); 
+	patota_pcb* aux = patotas->head;
+
+	for(int i = 0; i < tamanioLista; i++){
+		aux = list_get(patotas,i);
+		if(aux->id_patota == id){
+			free(aux);
+			return i;
+		}
+	}
+	free(aux);
+	return -1;
+}
+*/
+
+///////////////////////////////////////////////////////
+/*
+void elegirEsquema(void (*x)(int)){ 
+
+	if(string_equals_ignore_case(config_valores.esquema_memoria,"PAGINACION")){
+        x = manejarConexionPaginacion();
+    }else if(string_equals_ignore_case(config_valores.esquema_memoria, "SEGMENTACION")){
+        x = manejarConexionSegmentacion(); 
+    }
+}
+
+void manejarConexionSegmentacion(t_conexiones* conexiones){ 
+	int socket_cliente = conexiones->socket;
+	int socket_anterior = conexiones->socket_anterior;
+	
+	int codigoOperacion = recibir_operacion(socket_cliente);
+
+	switch(codigoOperacion){
+		case MENSAJE:
+			S_recibirMensaje(socket_cliente);
+			break;
+		case INICIAR_PATOTA:
+			S_iniciarPatota(socket_cliente);
+		break;
+		case INICIAR_TRIPULANTE:
+			S_iniciarTripulante(socket_cliente);
+		break;
+		case EXPULSAR_TRIPULANTE:
+			S_expulsarTripulante(socket_cliente);
+		break;
+		case ENVIAR_OP:
+			S_enviarOperacion(socket_cliente);
+		break;
+		case ACTUALIZAR_UBICACION:
+			S_actualizarUbicacion(socket_cliente);
+		break; 
+		case CAMBIAR_ESTADO://HOLA, SOY EL FRAN DEL PASADO Y VENGO PARA AVISARLES QUE ACA VAN A RECIBIR
+			//EL ID DEL TRIPU,DSPS DE LA PATOTA Y DSPS UN STRING DE 1 CARACTER, ESE CARACTER LES DICE
+			//EL NUEVO ESTADO DEL TRIPU. SALUDOS A LA FLIA, SE ME CUIDAN.
+			break;
+		case -1:
+			//log_info(logger, "El tripulante se desconecto.");
+		break;
+	}
+}
+
+void manejarConexionPaginacion(t_conexiones* conexiones){ 
+	int socket_cliente = conexiones->socket;
+	int socket_anterior = conexiones->socket_anterior;
+	int codigoOperacion = recibir_operacion(socket_cliente);
+
+	switch(codigoOperacion){
+		case MENSAJE:
+			P_recibirMensaje(socket_cliente);
+			break;
+		case INICIAR_PATOTA:
+			P_iniciarPatota(socket_cliente);
+		break;
+		case INICIAR_TRIPULANTE:
+			P_iniciarTripulante(socket_cliente);
+		break;
+		case EXPULSAR_TRIPULANTE:
+			P_expulsarTripulante(socket_cliente);
+		break;
+		case ENVIAR_OP:
+			P_enviarOperacion(socket_cliente);
+		break;
+		case ACTUALIZAR_UBICACION:
+			P_actualizarUbicacion(socket_cliente);
+		break; 
+		case -1:
+			//log_info(logger, "El tripulante se desconecto.");
+		break;
+	}
+}
+
+*/
+
+///////////////////////////////////////////////////////////////////////

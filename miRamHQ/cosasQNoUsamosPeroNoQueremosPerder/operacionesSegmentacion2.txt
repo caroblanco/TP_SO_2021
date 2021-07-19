@@ -1,0 +1,31 @@
+#ifndef OPSEGMENTACION
+#define OPSEGMENTACION
+
+
+#include<stdio.h>
+#include<stdlib.h>
+#include<commons/log.h>
+#include<commons/string.h>
+#include<commons/config.h>
+#include<readline/readline.h>
+#include <utils.h>
+#include <stdarg.h>
+#include <nivel-gui/nivel-gui.h>
+#include <nivel-gui/tad_nivel.h>
+#include "utils.h"
+#include "mi-ram.h"
+
+
+int encontrarTripulante(int);
+int encontrarPatota(int);
+void S_iniciarTripulante(int);
+void S_iniciarPatota(int);
+void S_expulsarTripulante(int);
+void sacarTripulanteListaGlobal(int);
+void liberarTabla(t_tabla_tripulante* );
+void S_actualizarUbicacion(int);
+void S_enviarOperacion(int);
+t_paquete* armarPaquete(char*);
+
+
+#endif /*OPSEGMENTACION*/

@@ -1,0 +1,220 @@
+==4771== Memcheck, a memory error detector
+==4771== Copyright (C) 2002-2015, and GNU GPL'd, by Julian Seward et al.
+==4771== Using Valgrind-3.11.0 and LibVEX; rerun with -h for copyright info
+==4771== Command: ./i-mongo
+==4771== Parent PID: 4638
+==4771== 
+==4771== 
+==4771== HEAP SUMMARY:
+==4771==     in use at exit: 73,147 bytes in 1,084 blocks
+==4771==   total heap usage: 23,215 allocs, 22,131 frees, 10,339,465 bytes allocated
+==4771== 
+==4771== 8 bytes in 4 blocks are definitely lost in loss record 8 of 73
+==4771==    at 0x402E2CC: realloc (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
+==4771==    by 0x405464B: string_trim_right (in /usr/lib/libcommons.so)
+==4771==    by 0x4054541: string_trim (in /usr/lib/libcommons.so)
+==4771==    by 0x4054939: string_get_string_as_array (in /usr/lib/libcommons.so)
+==4771==    by 0x4056FC2: config_get_array_value (in /usr/lib/libcommons.so)
+==4771==    by 0x8049560: agregarCaracter (gestion_bloques.c:16)
+==4771==    by 0x804D00A: generarOxigeno2 (imongo.c:299)
+==4771==    by 0x804C72F: manejar_conexion_con_pasamano (imongo.c:19)
+==4771==    by 0x4062294: start_thread (pthread_create.c:333)
+==4771==    by 0x41FF0AD: clone (clone.S:114)
+==4771== 
+==4771== 14 bytes in 6 blocks are definitely lost in loss record 13 of 73
+==4771==    at 0x402E2CC: realloc (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
+==4771==    by 0x40542D4: string_append (in /usr/lib/libcommons.so)
+==4771==    by 0x4054C5A: _string_append_with_format_list (in /usr/lib/libcommons.so)
+==4771==    by 0x40543C0: string_from_vformat (in /usr/lib/libcommons.so)
+==4771==    by 0x405435E: string_from_format (in /usr/lib/libcommons.so)
+==4771==    by 0x4054401: string_itoa (in /usr/lib/libcommons.so)
+==4771==    by 0x804B588: actualizarUbicacionBitacora (gestion_bloques.c:609)
+==4771==    by 0x4062294: start_thread (pthread_create.c:333)
+==4771==    by 0x41FF0AD: clone (clone.S:114)
+==4771== 
+==4771== 16 bytes in 4 blocks are definitely lost in loss record 15 of 73
+==4771==    at 0x402E2CC: realloc (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
+==4771==    by 0x40542D4: string_append (in /usr/lib/libcommons.so)
+==4771==    by 0x4054C5A: _string_append_with_format_list (in /usr/lib/libcommons.so)
+==4771==    by 0x40543C0: string_from_vformat (in /usr/lib/libcommons.so)
+==4771==    by 0x405435E: string_from_format (in /usr/lib/libcommons.so)
+==4771==    by 0x4054401: string_itoa (in /usr/lib/libcommons.so)
+==4771==    by 0x804C0F2: actualizarTarea (gestion_bloques.c:835)
+==4771==    by 0x804D02B: generarOxigeno2 (imongo.c:302)
+==4771==    by 0x804C72F: manejar_conexion_con_pasamano (imongo.c:19)
+==4771==    by 0x4062294: start_thread (pthread_create.c:333)
+==4771==    by 0x41FF0AD: clone (clone.S:114)
+==4771== 
+==4771== 16 bytes in 4 blocks are definitely lost in loss record 16 of 73
+==4771==    at 0x402E2CC: realloc (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
+==4771==    by 0x40542D4: string_append (in /usr/lib/libcommons.so)
+==4771==    by 0x4054C5A: _string_append_with_format_list (in /usr/lib/libcommons.so)
+==4771==    by 0x40543C0: string_from_vformat (in /usr/lib/libcommons.so)
+==4771==    by 0x405435E: string_from_format (in /usr/lib/libcommons.so)
+==4771==    by 0x4054401: string_itoa (in /usr/lib/libcommons.so)
+==4771==    by 0x804C0F2: actualizarTarea (gestion_bloques.c:835)
+==4771==    by 0x804D811: obtenerParametros_tareas (imongo.c:490)
+==4771==    by 0x804C961: manejar_conexion_con_pasamano (imongo.c:84)
+==4771==    by 0x4062294: start_thread (pthread_create.c:333)
+==4771==    by 0x41FF0AD: clone (clone.S:114)
+==4771== 
+==4771== 27 bytes in 12 blocks are definitely lost in loss record 23 of 73
+==4771==    at 0x402E2CC: realloc (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
+==4771==    by 0x405464B: string_trim_right (in /usr/lib/libcommons.so)
+==4771==    by 0x4054541: string_trim (in /usr/lib/libcommons.so)
+==4771==    by 0x4054939: string_get_string_as_array (in /usr/lib/libcommons.so)
+==4771==    by 0x4056FC2: config_get_array_value (in /usr/lib/libcommons.so)
+==4771==    by 0x804BC34: actualizarTarea (gestion_bloques.c:734)
+==4771==    by 0x804D02B: generarOxigeno2 (imongo.c:302)
+==4771==    by 0x804C72F: manejar_conexion_con_pasamano (imongo.c:19)
+==4771==    by 0x4062294: start_thread (pthread_create.c:333)
+==4771==    by 0x41FF0AD: clone (clone.S:114)
+==4771== 
+==4771== 27 bytes in 12 blocks are definitely lost in loss record 24 of 73
+==4771==    at 0x402E2CC: realloc (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
+==4771==    by 0x405464B: string_trim_right (in /usr/lib/libcommons.so)
+==4771==    by 0x4054541: string_trim (in /usr/lib/libcommons.so)
+==4771==    by 0x4054939: string_get_string_as_array (in /usr/lib/libcommons.so)
+==4771==    by 0x4056FC2: config_get_array_value (in /usr/lib/libcommons.so)
+==4771==    by 0x804BC34: actualizarTarea (gestion_bloques.c:734)
+==4771==    by 0x804D811: obtenerParametros_tareas (imongo.c:490)
+==4771==    by 0x804C961: manejar_conexion_con_pasamano (imongo.c:84)
+==4771==    by 0x4062294: start_thread (pthread_create.c:333)
+==4771==    by 0x41FF0AD: clone (clone.S:114)
+==4771== 
+==4771== 32 bytes in 4 blocks are indirectly lost in loss record 30 of 73
+==4771==    at 0x402C17C: malloc (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
+==4771==    by 0x411464D: crear_buffer (utils.c:131)
+==4771==    by 0x4114718: crear_paquete_con_codigo_op (utils.c:159)
+==4771==    by 0x804DB9D: enviar_ok (imongo.c:563)
+==4771==    by 0x804D039: generarOxigeno2 (imongo.c:303)
+==4771==    by 0x804C72F: manejar_conexion_con_pasamano (imongo.c:19)
+==4771==    by 0x4062294: start_thread (pthread_create.c:333)
+==4771==    by 0x41FF0AD: clone (clone.S:114)
+==4771== 
+==4771== 32 bytes in 4 blocks are indirectly lost in loss record 31 of 73
+==4771==    at 0x402C17C: malloc (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
+==4771==    by 0x411464D: crear_buffer (utils.c:131)
+==4771==    by 0x4114718: crear_paquete_con_codigo_op (utils.c:159)
+==4771==    by 0x804DB9D: enviar_ok (imongo.c:563)
+==4771==    by 0x804D81F: obtenerParametros_tareas (imongo.c:492)
+==4771==    by 0x804C961: manejar_conexion_con_pasamano (imongo.c:84)
+==4771==    by 0x4062294: start_thread (pthread_create.c:333)
+==4771==    by 0x41FF0AD: clone (clone.S:114)
+==4771== 
+==4771== 45 bytes in 18 blocks are definitely lost in loss record 32 of 73
+==4771==    at 0x402E2CC: realloc (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
+==4771==    by 0x405464B: string_trim_right (in /usr/lib/libcommons.so)
+==4771==    by 0x4054541: string_trim (in /usr/lib/libcommons.so)
+==4771==    by 0x4054939: string_get_string_as_array (in /usr/lib/libcommons.so)
+==4771==    by 0x4056FC2: config_get_array_value (in /usr/lib/libcommons.so)
+==4771==    by 0x804E8EF: crearBitacora (init_file-system.c:289)
+==4771==    by 0x804D661: iniciarTripualnte (imongo.c:448)
+==4771==    by 0x804C857: manejar_conexion_con_pasamano (imongo.c:50)
+==4771==    by 0x4062294: start_thread (pthread_create.c:333)
+==4771==    by 0x41FF0AD: clone (clone.S:114)
+==4771== 
+==4771== 64 (32 direct, 32 indirect) bytes in 4 blocks are definitely lost in loss record 34 of 73
+==4771==    at 0x402C17C: malloc (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
+==4771==    by 0x41146FF: crear_paquete_con_codigo_op (utils.c:157)
+==4771==    by 0x804DB9D: enviar_ok (imongo.c:563)
+==4771==    by 0x804D039: generarOxigeno2 (imongo.c:303)
+==4771==    by 0x804C72F: manejar_conexion_con_pasamano (imongo.c:19)
+==4771==    by 0x4062294: start_thread (pthread_create.c:333)
+==4771==    by 0x41FF0AD: clone (clone.S:114)
+==4771== 
+==4771== 64 (32 direct, 32 indirect) bytes in 4 blocks are definitely lost in loss record 35 of 73
+==4771==    at 0x402C17C: malloc (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
+==4771==    by 0x41146FF: crear_paquete_con_codigo_op (utils.c:157)
+==4771==    by 0x804DB9D: enviar_ok (imongo.c:563)
+==4771==    by 0x804D81F: obtenerParametros_tareas (imongo.c:492)
+==4771==    by 0x804C961: manejar_conexion_con_pasamano (imongo.c:84)
+==4771==    by 0x4062294: start_thread (pthread_create.c:333)
+==4771==    by 0x41FF0AD: clone (clone.S:114)
+==4771== 
+==4771== 112 bytes in 14 blocks are indirectly lost in loss record 39 of 73
+==4771==    at 0x402C17C: malloc (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
+==4771==    by 0x411464D: crear_buffer (utils.c:131)
+==4771==    by 0x4114718: crear_paquete_con_codigo_op (utils.c:159)
+==4771==    by 0x804DBE7: enviar_ok2 (imongo.c:571)
+==4771==    by 0x804D66F: iniciarTripualnte (imongo.c:449)
+==4771==    by 0x804C857: manejar_conexion_con_pasamano (imongo.c:50)
+==4771==    by 0x4062294: start_thread (pthread_create.c:333)
+==4771==    by 0x41FF0AD: clone (clone.S:114)
+==4771== 
+==4771== 136 bytes in 1 blocks are definitely lost in loss record 41 of 73
+==4771==    at 0x402E0B8: calloc (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
+==4771==    by 0x4011726: allocate_dtv (dl-tls.c:322)
+==4771==    by 0x401214B: _dl_allocate_tls (dl-tls.c:539)
+==4771==    by 0x4062CC3: allocate_stack (allocatestack.c:588)
+==4771==    by 0x4062CC3: pthread_create@@GLIBC_2.1 (pthread_create.c:539)
+==4771==    by 0x804DC54: iniciar_file_system (init_file-system.c:11)
+==4771==    by 0x804CBC7: main (imongo.c:166)
+==4771== 
+==4771== 224 (112 direct, 112 indirect) bytes in 14 blocks are definitely lost in loss record 43 of 73
+==4771==    at 0x402C17C: malloc (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
+==4771==    by 0x41146FF: crear_paquete_con_codigo_op (utils.c:157)
+==4771==    by 0x804DBE7: enviar_ok2 (imongo.c:571)
+==4771==    by 0x804D66F: iniciarTripualnte (imongo.c:449)
+==4771==    by 0x804C857: manejar_conexion_con_pasamano (imongo.c:50)
+==4771==    by 0x4062294: start_thread (pthread_create.c:333)
+==4771==    by 0x41FF0AD: clone (clone.S:114)
+==4771== 
+==4771== 490 bytes in 218 blocks are definitely lost in loss record 47 of 73
+==4771==    at 0x402E2CC: realloc (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
+==4771==    by 0x405464B: string_trim_right (in /usr/lib/libcommons.so)
+==4771==    by 0x4054541: string_trim (in /usr/lib/libcommons.so)
+==4771==    by 0x4054939: string_get_string_as_array (in /usr/lib/libcommons.so)
+==4771==    by 0x4056FC2: config_get_array_value (in /usr/lib/libcommons.so)
+==4771==    by 0x804B429: actualizarUbicacionBitacora (gestion_bloques.c:581)
+==4771==    by 0x4062294: start_thread (pthread_create.c:333)
+==4771==    by 0x41FF0AD: clone (clone.S:114)
+==4771== 
+==4771== 536 bytes in 140 blocks are definitely lost in loss record 48 of 73
+==4771==    at 0x402E2CC: realloc (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
+==4771==    by 0x40542D4: string_append (in /usr/lib/libcommons.so)
+==4771==    by 0x4054C5A: _string_append_with_format_list (in /usr/lib/libcommons.so)
+==4771==    by 0x40543C0: string_from_vformat (in /usr/lib/libcommons.so)
+==4771==    by 0x405435E: string_from_format (in /usr/lib/libcommons.so)
+==4771==    by 0x4054401: string_itoa (in /usr/lib/libcommons.so)
+==4771==    by 0x804B96D: actualizarUbicacionBitacora (gestion_bloques.c:687)
+==4771==    by 0x4062294: start_thread (pthread_create.c:333)
+==4771==    by 0x41FF0AD: clone (clone.S:114)
+==4771== 
+==4771== 1,120 bytes in 140 blocks are indirectly lost in loss record 58 of 73
+==4771==    at 0x402C17C: malloc (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
+==4771==    by 0x411464D: crear_buffer (utils.c:131)
+==4771==    by 0x4114718: crear_paquete_con_codigo_op (utils.c:159)
+==4771==    by 0x804DB9D: enviar_ok (imongo.c:563)
+==4771==    by 0x804D796: obtenerParametros_ubicacion (imongo.c:477)
+==4771==    by 0x804C880: manejar_conexion_con_pasamano (imongo.c:55)
+==4771==    by 0x4062294: start_thread (pthread_create.c:333)
+==4771==    by 0x41FF0AD: clone (clone.S:114)
+==4771== 
+==4771== 2,240 (1,120 direct, 1,120 indirect) bytes in 140 blocks are definitely lost in loss record 64 of 73
+==4771==    at 0x402C17C: malloc (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
+==4771==    by 0x41146FF: crear_paquete_con_codigo_op (utils.c:157)
+==4771==    by 0x804DB9D: enviar_ok (imongo.c:563)
+==4771==    by 0x804D796: obtenerParametros_ubicacion (imongo.c:477)
+==4771==    by 0x804C880: manejar_conexion_con_pasamano (imongo.c:55)
+==4771==    by 0x4062294: start_thread (pthread_create.c:333)
+==4771==    by 0x41FF0AD: clone (clone.S:114)
+==4771== 
+==4771== 2,800 bytes in 140 blocks are definitely lost in loss record 65 of 73
+==4771==    at 0x402C17C: malloc (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
+==4771==    by 0x804D726: obtenerParametros_ubicacion (imongo.c:465)
+==4771==    by 0x804C880: manejar_conexion_con_pasamano (imongo.c:55)
+==4771==    by 0x4062294: start_thread (pthread_create.c:333)
+==4771==    by 0x41FF0AD: clone (clone.S:114)
+==4771== 
+==4771== LEAK SUMMARY:
+==4771==    definitely lost: 5,411 bytes in 721 blocks
+==4771==    indirectly lost: 1,296 bytes in 162 blocks
+==4771==      possibly lost: 136 bytes in 1 blocks
+==4771==    still reachable: 66,304 bytes in 200 blocks
+==4771==         suppressed: 0 bytes in 0 blocks
+==4771== Reachable blocks (those to which a pointer was found) are not shown.
+==4771== To see them, rerun with: --leak-check=full --show-leak-kinds=all
+==4771== 
+==4771== For counts of detected and suppressed errors, rerun with: -v
+==4771== ERROR SUMMARY: 16 errors from 16 contexts (suppressed: 0 from 0)

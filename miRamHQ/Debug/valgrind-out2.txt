@@ -1,0 +1,50 @@
+==10361== Memcheck, a memory error detector
+==10361== Copyright (C) 2002-2015, and GNU GPL'd, by Julian Seward et al.
+==10361== Using Valgrind-3.11.0 and LibVEX; rerun with -h for copyright info
+==10361== Command: ./miRamHQ
+==10361== Parent PID: 3167
+==10361== 
+==10361== Thread 3:
+==10361== Invalid read of size 1
+==10361==    at 0x417311B: ____strtol_l_internal (strtol_l.c:293)
+==10361==    by 0x4172F1F: strtol (strtol.c:106)
+==10361==    by 0x417025F: atoi (atoi.c:27)
+==10361==    by 0x804FEE9: armarPaquete (opComunes.c:471)
+==10361==    by 0x804FCFF: enviarOperacion (opComunes.c:420)
+==10361==    by 0x804EFF6: manejarConexion (mi-ram.c:154)
+==10361==    by 0x40B7294: start_thread (pthread_create.c:333)
+==10361==    by 0x422A0AD: clone (clone.S:114)
+==10361==  Address 0x0 is not stack'd, malloc'd or (recently) free'd
+==10361== 
+==10361== 
+==10361== Process terminating with default action of signal 11 (SIGSEGV)
+==10361==  Access not within mapped region at address 0x0
+==10361==    at 0x417311B: ____strtol_l_internal (strtol_l.c:293)
+==10361==    by 0x4172F1F: strtol (strtol.c:106)
+==10361==    by 0x417025F: atoi (atoi.c:27)
+==10361==    by 0x804FEE9: armarPaquete (opComunes.c:471)
+==10361==    by 0x804FCFF: enviarOperacion (opComunes.c:420)
+==10361==    by 0x804EFF6: manejarConexion (mi-ram.c:154)
+==10361==    by 0x40B7294: start_thread (pthread_create.c:333)
+==10361==    by 0x422A0AD: clone (clone.S:114)
+==10361==  If you believe this happened as a result of a stack
+==10361==  overflow in your program's main thread (unlikely but
+==10361==  possible), you can try to increase the size of the
+==10361==  main thread stack using the --main-stacksize= flag.
+==10361==  The main thread stack size used in this run was 8388608.
+==10361== 
+==10361== HEAP SUMMARY:
+==10361==     in use at exit: 135,162 bytes in 664 blocks
+==10361==   total heap usage: 2,385 allocs, 1,721 frees, 210,650 bytes allocated
+==10361== 
+==10361== LEAK SUMMARY:
+==10361==    definitely lost: 0 bytes in 0 blocks
+==10361==    indirectly lost: 0 bytes in 0 blocks
+==10361==      possibly lost: 272 bytes in 2 blocks
+==10361==    still reachable: 134,890 bytes in 662 blocks
+==10361==         suppressed: 0 bytes in 0 blocks
+==10361== Reachable blocks (those to which a pointer was found) are not shown.
+==10361== To see them, rerun with: --leak-check=full --show-leak-kinds=all
+==10361== 
+==10361== For counts of detected and suppressed errors, rerun with: -v
+==10361== ERROR SUMMARY: 3 errors from 3 contexts (suppressed: 0 from 0)

@@ -1,0 +1,223 @@
+#include "operacionesPaginacion.h"
+
+//////////////////////////////////////PAGINACION///////////////////////////////////////////////////
+
+void P_iniciarTripulante(int socket_cliente){
+    int size;
+	char * buffer;
+	int desp = 0;
+
+	t_tcb* tripulanteNuevo = malloc(sizeof(t_tcb));
+
+	buffer = recibir_buffer(&size, socket);
+		
+	int idTripu = leer_entero(buffer, &desp);
+	printf("lei el id de un tripu: %d", idTripu);
+
+	int idPato = leer_entero(buffer, &desp);
+	printf("lei el id de una patota: %d", idPato);
+	
+	//buscamos la patota
+	int direccionPatota = buscarDirPatotaPag(idPato);
+		
+	int posX = leer_entero(buffer, &desp);
+	printf("lei la pos_x de un tripulante: %d", posX);
+		
+	int posY = leer_entero(buffer, &desp);
+	printf("lei la pos en Y del tripu: %d", posY);
+
+	tripulanteNuevo->idTripulante 	= idTripu;
+	tripulanteNuevo->estado			= 'N';
+	tripulanteNuevo->pos_x 			= posX;
+	tripulanteNuevo->pos_y 			= posY;
+	tripulanteNuevo->dir_PCB 		= direccionPatota;	// ES DIR LOGICA
+	tripulanteNuevo->id_sig_inst 	= 0;
+	
+	//AGREGAMOS EL ID A LA TABLA DE PAGINA DE LA PATOTA
+	agregarIdTripulanteAPag(idTripu,idPato);
+
+	//GUARDAMOS EL TCB EN UNA PAGINA
+	guardarTcbPaginacion(tcb, idPato);
+
+	//AGREGO AL TRIPULANTE AL MAPA
+	char charId = intToChar(idTripu);
+	dibujar_tripulante(charId,  posX,  posY);
+
+	free(buffer);
+	free(tripulanteNuevo);
+}
+
+
+void P_iniciarPatota(int socket_cliente){
+    int size;
+	char * buffer;
+	int desp = 0;
+
+	buffer = recibir_buffer(&size, socket);
+		
+	char* tareas = leer_string(buffer, &desp);	//STRING DE TODAS LAS TAREAS \n
+	printf("lei el string de las tareas");
+		
+	int idPatota = leer_entero(buffer, &desp);
+	printf("lei el id de una patota: %d", id);
+
+	int cantTripus = leer_entero(buffer, &desp);
+	printf("lei la cantidad de tripus: %d", cantTripus);
+
+	//HAYLUGAR -> UN TCB = 21 BYTES, VAN A HABER N TCBS + 1 PCB (OCUPA 8 BYTES) + TAREAS
+    int tamanioTareas= (strlen(tareas)+1);
+	int hayLugar = puedoGuardar(21*cantTripus + tamanioTareas + sizeof(t_pcb));
+
+	if(hayLugar){		
+
+        //PRIMERO GUARDAMOS LAS TAREAS 
+        t_list* paginasTareas= guardarTareasPaginacion(tareas);
+
+        //DIRECCION LOGICA DE LAS TAREAS PARA GUARDARLA EN LA PCB
+        t_pagina* primerPagina= list_get(paginasTareas,0); 
+        int dirTareas= calcularDirLogica(primerPagina,0);
+
+        //CREAMOS LA TABLA DE PAGINAS
+        t_tabla_de_pagina* unaTabla = crearTablaDePaginas(idPatota,tamanioTareas, cantTripus);
+
+		//GUARDO LAS TAREAS EN LA TABLA DE LA PATOTA
+        agregarPaginasATablaDePatota(idPatota, paginasTareas);
+		
+        //CREAMOS LE PCB
+        t_pcb* pcb = malloc(sizeof(t_pcb));
+		pcb->idPatota = idPatota;
+		pcb->tareas = dirTareas; //DONDE INICIAN LAS TAREAS
+
+        //GUARDAMOS LA PCB
+        guardarPcbPaginacion(pcb);
+
+		printf("agregue la patota");
+		
+		// CREO LA TABLA DE LA PATOTA Y GUARDO EL SEGMENTO DE LAS TAREAS Y EL DEL PCB, GUARDO EN LA LISTA GLOBAL DE PATOTAS
+
+		
+        list_add(tablaDePaginasDePatotas,unaTabla);
+		
+		t_paquete* nuevoPaquete = crear_paquete_con_codigo_op(OK);
+
+	}else{
+		t_paquete* nuevoPaquete = crear_paquete_con_codigo_op(FAIL);
+	}
+
+    //ENVIAR PAQUETE
+	enviar_paquete(nuevoPaquete, socket_cliente);
+	//BORRAR PAQUETE
+    eliminar_paquete(nuevoPaquete);
+	//LIBERAR CONEXION
+	liberar_conexion(socket_cliente);
+
+	free(buffer);
+	free(tarea);
+	free(tareasSeparadas);
+	free(pcb);
+}
+
+void P_expulsarTripulante(int socket_cliente){
+	
+}
+
+void P_actualizarUbicacion(int socket_cliente){
+	int size;
+	char * buffer;
+	int desp = 0;
+
+	buffer = recibir_buffer(&size, socket);
+	
+	int id = leer_entero(buffer, &desp);
+	printf("lei el id de un tripulante: %d", id);
+
+	int nuevaPosX = leer_entero(buffer, &desp);
+	printf("lei la nueva posicion en X del tripulante: %d", nuevaPosX);
+	
+	int nuevaPosY = leer_entero(buffer, &desp);
+	printf("lei la nueva posicion en Y del tripulante: %d", nuevaPosY);
+
+	//PASAR EL ID A CHAR
+	char charId = intToChar(id);
+	moverTripulante(charId,nuevaPosX,nuevaPosY); 
+	
+	//ACTUALIZAR TRIPULANTE
+
+	free(buffer);
+}
+
+void P_enviarOperacion(int socket_cliente){
+    int size;
+	char * buffer;
+	int desp = 0;
+
+	buffer = recibir_buffer(&size, socket_cliente);
+	
+	int idPatota = leer_entero(buffer, &desp);
+	printf("lei el id de una patota: %d", idPatota);
+
+    int idTripu = leer_entero(buffer, &desp);
+	printf("lei el id de un tripulante: %d", idTripu);
+
+	//BUSCO EL TRIPU CON EL ID
+	t_tcb* tcb = buscarTripulantePaginacion(idTripu, idPatota);
+
+	//BUSCAMOS LA TAREA USANDO LA LISTA DE TAREAS DE LA PCB Y LA PROX INSTRUCCION DE LA TCB
+	char* tarea = buscarTareaPaginacion(idPatota, tcb->proxInstruccion);
+
+	//ACTUALIZO EL TRIPULANTE
+	tcb->proxInstruccion ++;
+	tcb-> estado = 'r';
+
+	//CREO PAQUETE
+		t_paquete* nuevoPaquete = armarPaquete(tarea);
+	//ENVIAR PAQUETE
+		enviar_paquete(nuevoPaquete, socket_cliente);
+	//BORRAR PAQUETE
+		eliminar_paquete(nuevoPaquete);
+	//LIBERAR CONEXION
+		liberar_conexion(socket_cliente);
+
+	free(buffer);
+	free(tcb);
+	free(pcb);
+	free(tarea);
+}
+
+t_paquete* armarPaquete(char* tarea){
+	
+	//SACAMOS LA INFO DE LA TAREA
+	char** splitPorPuntoYcoma = string_split(tarea, ";"); 						// SEPARA CODIGO PARAMETROS ; POSX ; POSY ; TIEMPO
+	char** splitPorEspacio = string_split(splitPorPuntoYcoma[0], " "); 			// SEPARA CODIGO PARAMETROS
+
+	//VEO SI ES LA ULTIMA
+	int esLaUltima = esLaUltimaTarea(pcb->idPatota, tcb->proxInstruccion);
+
+	//PASAMOS LA INFO DE LA TAREA A INTS
+	op_code codigoOperacion;
+	if(			string_equals_ignore_case(splitPorEspacio[0], "GENERAR_OXIGENO")) { codigoOperacion= GENERAR_OXIGENO;	}
+	else if(	string_equals_ignore_case(splitPorEspacio[0], "CONSUMIR_OXIGENO")){ codigoOperacion= CONSUMIR_OXIGENO;	}
+	else if(	string_equals_ignore_case(splitPorEspacio[0], "GENERAR_COMIDA"))  { codigoOperacion= GENERAR_COMIDA;	}
+	else if(	string_equals_ignore_case(splitPorEspacio[0], "CONSUMIR_COMIDA")) { codigoOperacion= CONSUMIR_COMIDA;	}
+	else if(	string_equals_ignore_case(splitPorEspacio[0], "GENERAR_BASURA"))  { codigoOperacion= GENERAR_BASURA;	}
+	else if(	string_equals_ignore_case(splitPorEspacio[0], "DESCARTAR_BASURA")){ codigoOperacion= DESCARTAR_BASURA;	}
+	else if(	string_equals_ignore_case(splitPorEspacio[0], "MOVERSE"))         { codigoOperacion= MOVERSE;			}
+	
+	int posX 				= atoi(splitPorPuntoYcoma[1]);
+	int posY 				= atoi(splitPorPuntoYcoma[2]);
+	int parametros 			= atoi(splitPorEspacio[1]);
+	int tiempo 				= atoi(splitPorPuntoYcoma[3]);
+
+	//CREAMOS EL PAQUETE
+	t_paquete* nuevoPaquete = crear_paquete_con_codigo_op(codigoOperacion);
+	agregar_entero_a_paquete(nuevoPaquete, posX); 
+	agregar_entero_a_paquete(nuevoPaquete, posY);
+	agregar_entero_a_paquete(nuevoPaquete, parametros); 
+	agregar_entero_a_paquete(nuevoPaquete, tiempo);
+	agregar_entero_a_paquete(nuevoPaquete, esLaUltima);
+	
+	return nuevoPaquete;
+
+	free(splitPorPuntoYcoma);
+	free(splitPorEspacio);
+}

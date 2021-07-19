@@ -1,0 +1,31 @@
+==24883== Memcheck, a memory error detector
+==24883== Copyright (C) 2002-2015, and GNU GPL'd, by Julian Seward et al.
+==24883== Using Valgrind-3.11.0 and LibVEX; rerun with -h for copyright info
+==24883== Command: ./miRamHQ
+==24883== Parent PID: 3167
+==24883== 
+==24883== 
+==24883== HEAP SUMMARY:
+==24883==     in use at exit: 85,323 bytes in 476 blocks
+==24883==   total heap usage: 797 allocs, 321 frees, 163,696 bytes allocated
+==24883== 
+==24883== 5 bytes in 1 blocks are definitely lost in loss record 5 of 62
+==24883==    at 0x402E2CC: realloc (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
+==24883==    by 0x40542D4: string_append (in /usr/lib/libcommons.so)
+==24883==    by 0x4054C5A: _string_append_with_format_list (in /usr/lib/libcommons.so)
+==24883==    by 0x40543C0: string_from_vformat (in /usr/lib/libcommons.so)
+==24883==    by 0x405435E: string_from_format (in /usr/lib/libcommons.so)
+==24883==    by 0x4054401: string_itoa (in /usr/lib/libcommons.so)
+==24883==    by 0x804EC7D: main (mi-ram.c:41)
+==24883== 
+==24883== LEAK SUMMARY:
+==24883==    definitely lost: 5 bytes in 1 blocks
+==24883==    indirectly lost: 0 bytes in 0 blocks
+==24883==      possibly lost: 272 bytes in 2 blocks
+==24883==    still reachable: 85,046 bytes in 473 blocks
+==24883==         suppressed: 0 bytes in 0 blocks
+==24883== Reachable blocks (those to which a pointer was found) are not shown.
+==24883== To see them, rerun with: --leak-check=full --show-leak-kinds=all
+==24883== 
+==24883== For counts of detected and suppressed errors, rerun with: -v
+==24883== ERROR SUMMARY: 3 errors from 3 contexts (suppressed: 0 from 0)

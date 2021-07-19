@@ -1,0 +1,30 @@
+#ifndef OPPAGINACION
+#define OPPAGINACION
+
+
+#include<stdio.h>
+#include<stdlib.h>
+#include<commons/log.h>
+#include<commons/string.h>
+#include<commons/config.h>
+#include<readline/readline.h>
+#include <utils.h>
+#include <stdarg.h>
+#include <nivel-gui/nivel-gui.h>
+#include <nivel-gui/tad_nivel.h>
+#include "utils.h"
+#include "memoriaPaginacion.h"
+#include "mi-ram.h"
+
+int encontrarTripulante(int);
+void cambiarPosiciones(int,int,int);
+int encontrarPatota(int);
+void P_iniciarTripulante(int);
+void P_iniciarPatota(int);
+void P_expulsarTripulante(int);
+void P_actualizarUbicacion(int);
+void P_enviarOperacion(int);
+
+
+
+#endif /*OPPAGINACION*/
